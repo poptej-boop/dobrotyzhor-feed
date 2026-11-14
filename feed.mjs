@@ -73,6 +73,7 @@ function novaKategorie(kategorie, nazev) {
 
 const KATEGORIE_DZEM = ["Džem", "Džemy a marmelády"];
 const KATEGORIE_KORENI = ["Koření"];
+const KATEGORIE_PECENY_CAJ = ["Pečený čaj"];
 const norm = (s) => s.replace(/\s+/g, " ").trim();
 
 function novyNazev(nazev, kategorie) {
@@ -86,6 +87,9 @@ function novyNazev(nazev, kategorie) {
   }
   if (KATEGORIE_KORENI.includes(kategorie) && !/koření|balíček/i.test(n)) {
     return n.replace(/^(.*?)(\s+\d+\s*g)?$/, (_, a, g) => `${a} – sušené koření${g || ""}`);
+  }
+  if (KATEGORIE_PECENY_CAJ.includes(kategorie) && !/čaj|balíček/i.test(n)) {
+    return "Pečený čaj " + n;
   }
   return null;
 }
