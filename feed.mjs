@@ -62,7 +62,13 @@ const KATEGORIE_ZBOZI = {
   "Dárkové poukazy": DARKY + "Dárkové poukazy",
 };
 
+// Výjimky podle názvu (mají přednost před kategorií e-shopu).
+// Alkoholové balíčky a dárkové tašky mají vlastní kategorii, aby se daly vynechat z kampaně Nákupy.
+const ALKOHOL = "Potraviny a nápoje | Nápoje | Alkoholické nápoje";
+
 function novaKategorie(kategorie, nazev) {
+  if (/goldcock|volařík|balíček s (vínem|whiske?y)/i.test(nazev)) return ALKOHOL;
+  if (/dárková taška/i.test(nazev)) return DARKY + "Dárkové tašky";
   if (KATEGORIE_ZBOZI[kategorie]) return KATEGORIE_ZBOZI[kategorie];
   if (kategorie === "Dárkové předměty") {
     if (/taška/i.test(nazev)) return DARKY + "Dárkové tašky";
